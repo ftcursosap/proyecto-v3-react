@@ -5,28 +5,43 @@ import './App.css'
 
 function App() {
   const [texto, setTexto] = useState("");
+  const [tareas, setTareas] = useState([]);
 
-  function manejarCambio(evento){
-    setTexto(evento.target.value);
+  function manejarCambio(e){
+    setTexto(e.target.value);
+  }
+
+  function agregarTarea(){
+    if (texto.trim() === "") return;
+
+    const nuevasTareas = [...tareas, texto];
+
+    setTareas(nuevasTareas);
+
+    setTexto("");
   }
 
   return (
     <div>
-      <h1>Formulario React</h1>
-      <h2>Mi primer formulario en React</h2>
+      <h1>Lista de tareas</h1>
 
       <input 
-        type="text" 
+        type="text"
         value={texto}
-        onChange={manejarCambio} 
-        placeholder='Escribe un texto'
+        onChange={manejarCambio}
       />
 
-      <p>Escribiste: {texto}</p>
-      <p>Cantidad de letras: {texto.length}</p>
+      <button onClick={agregarTarea}>
+        Agregar
+      </button>
+
+      <ul>
+        {tareas.map((tarea, index) => (
+          <li key={index}>{tarea}</li>
+        ))}
+      </ul>
     </div>
   )
-  
 }
 
 export default App
