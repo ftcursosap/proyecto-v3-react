@@ -4,32 +4,28 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [contador, setContador] = useState(2);
+  const [texto, setTexto] = useState("");
 
-  function aumentar() {
-    setContador(contador + 1);
+  function manejarCambio(evento){
+    setTexto(evento.target.value);
   }
 
-  function disminuir() {
-    setContador(contador - 1);
-  }
-
-  function cero() {
-    setContador(contador * 0);
-  }
-
-  return(
+  return (
     <div>
-      <h1>Contador</h1>
-      <h2>Mi contador en React</h2>
-      <p>{contador}</p>
+      <h1>Formulario React</h1>
+      <h2>Mi primer formulario en React</h2>
 
-      <button onClick={aumentar}>Suma 1</button>
-      <button onClick={disminuir}>Resta 1</button>
-      <button onClick={cero}>Valor cero</button>
+      <input 
+        type="text" 
+        value={texto}
+        onChange={manejarCambio} 
+        placeholder='Escribe un texto'
+      />
 
+      <p>Escribiste: {texto}</p>
+      <p>Cantidad de letras: {texto.length}</p>
     </div>
-  );
+  )
   
 }
 
