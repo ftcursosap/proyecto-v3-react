@@ -7,26 +7,30 @@ function App() {
   const [texto, setTexto] = useState("");
   const [tareas, setTareas] = useState([]);
 
-  function manejarCambio(e){
+  function manejarCambio(e) {
     setTexto(e.target.value);
   }
 
-  function agregarTarea(){
-    if (texto.trim() === "") return;
+  function agregarTarea() {
+    if(texto.trim() === "") return;
 
-    const nuevasTareas = [...tareas, texto];
-
-    setTareas(nuevasTareas);
+    setTareas([...tareas, texto]);
 
     setTexto("");
   }
 
+  function eliminarTarea(index) {
+    const nuevasTareas = tareas.filter((_, i) => i !== index);
+
+    setTareas(nuevasTareas);
+  }
+
   return (
     <div>
-      <h1>Lista de tareas</h1>
+      <h1>Mi lista React</h1>
 
       <input 
-        type="text"
+        type="text" 
         value={texto}
         onChange={manejarCambio}
       />
@@ -37,7 +41,14 @@ function App() {
 
       <ul>
         {tareas.map((tarea, index) => (
-          <li key={index}>{tarea}</li>
+          <li key={index}>
+            {tarea}
+
+            <button onClick={() => eliminarTarea(index)}>
+              Eliminar
+            </button>
+
+          </li>
         ))}
       </ul>
     </div>
